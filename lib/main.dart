@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -5,12 +6,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  Color color = Color(0xff12163b);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Zakat Calculator',
       theme: ThemeData(
+        scaffoldBackgroundColor: const Color(0xff12163b),
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -20,9 +23,8 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Zakat Calculator'),
     );
   }
 }
@@ -46,19 +48,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+  double money = 2000;
+  double gold=100;
+  double zakat;
+  double slider=50;
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -69,45 +62,99 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2b305f),
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      body: Column(
+        children: [
+          Expanded(
+            flex: 9,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height*0.3,
+                      color: Colors.white30,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text("I have ${money.round().toString()} EGP",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white60),),
+                          Slider(value: money,min: 0,max: 500000,label: money.round().toString(),activeColor: Color(
+                              0xFFD50D5A),inactiveColor: Color(0xFFD4125E), onChanged: (double NewValue){
+                            setState(() {
+                              money=NewValue;
+                            });
+                          }),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height*0.3,
+                      color: Colors.white30,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text("Gold Price is",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white60)),
+                          Text(gold.round().toString(),style:TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white60) ,),
+                          Slider(min: 50, max: 2500,activeColor: Color(
+                              0xFF007580),inactiveColor: Color(0xFF007580),value: gold, onChanged: (double newValue){
+                            setState(() {
+                              gold=newValue;
+                            });
+                          }),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 20,),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height*0.3,
+                      color: Colors.white30,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [Text("Your Zakat is ",style: TextStyle(fontSize: 40,color: Color(
+                            0xffffc93c),fontWeight: FontWeight.bold),),
+                          Text(zakat.toString(),style: TextStyle(fontSize: 40,color: Color(
+                              0xffffc93c),fontWeight: FontWeight.bold))
+                     ] ),
+                    )
+                  ],
+                ),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.white30,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height*0.1,
+              child: ElevatedButton(
+                onPressed: (){
+                setState(() {
+                  calc(money.round());
+                });
+              },child: Text("Calculate"),),
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+          ),
+        ],
+      )
     );
   }
-}
+  int calc(int money){
+      if(money<gold*85){
+        zakat = 0;
+      }else{
+        zakat = money/40;
+      }
+    }
+  }
+
