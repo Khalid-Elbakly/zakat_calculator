@@ -21,7 +21,7 @@ class MainPage extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: ElevatedButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (_){return Money();}));},
-                    child: Text("زكاة المال",style: TextStyle(color: Color(0x99FFFFFF)),),
+                    child: Text("زكاة المال",style: TextStyle(color: Color(0x99FFFFFF),fontSize: 30),),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white30,
                     padding: EdgeInsets.fromLTRB(40, 20, 40, 20)
@@ -32,7 +32,7 @@ class MainPage extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: ElevatedButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (_){return Gold();}));},
-                  child: Text("زكاة الذهب",style: TextStyle(color: Color(0x99FFFFFF)),),
+                  child: Text("زكاة الذهب",style: TextStyle(color: Color(0x99FFFFFF),fontSize: 30)),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.white30,
                       padding: EdgeInsets.fromLTRB(40, 20, 40, 20)
@@ -43,7 +43,7 @@ class MainPage extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: ElevatedButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (_){return Silver();}));},
-                  child: Text("زكاة الفضة",style: TextStyle(color: Color(0x99FFFFFF)),),
+                  child: Text("زكاة الفضة",style: TextStyle(color: Color(0x99FFFFFF),fontSize: 30)),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.white30,
                       padding: EdgeInsets.fromLTRB(40, 20, 40, 20)
