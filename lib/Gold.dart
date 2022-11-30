@@ -13,8 +13,6 @@ class _GoldState extends State<Gold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("حساب زكاة الذهب"),
-          backgroundColor: Color(0xff2b305f)),
       backgroundColor: Color(0xff12163b) ,
       body: Column(
         children: [

@@ -16,12 +16,7 @@ class _State extends State<Money> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xff2b305f),
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text("حساب زكاة المال"),
-        ),
+        backgroundColor: Color(0xff12163b),
         body: Column(
           children: [
             Expanded(

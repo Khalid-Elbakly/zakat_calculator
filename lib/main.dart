@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zakat_calculator/MainPage.dart';
 
+import 'home.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -57,7 +59,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return MainPage();
+    return MaterialApp(
+      home: Home(),
+    );
     }
   }
 

@@ -12,8 +12,6 @@ class _silverState extends State<Silver> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("حساب زكاة الفضة"),
-          backgroundColor: Color(0xff2b305f)),
       backgroundColor: Color(0xff12163b) ,
       body: Column(
         children: [
@@ -90,8 +88,10 @@ class _silverState extends State<Silver> {
           ),
           Expanded(
               flex: 1,
-              child: ElevatedButton(onPressed: (){
+              child: ElevatedButton(onPressed: () async {
                 calc(silver);
+                var KHh = await KH();
+                print(KHh);
               }, child: Text("احسب")))
         ],
       ),
@@ -102,5 +102,8 @@ class _silverState extends State<Silver> {
       if(GramsOfSilver<595) zakat = 0;
       zakat = GramsOfSilver/40;
     });
+  }
+  Future<String> KH () async{
+    return "KSS";
   }
 }
